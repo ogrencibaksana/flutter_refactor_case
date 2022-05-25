@@ -1,31 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_refactor_case/home/home_view.dart';
+import 'package:flutter_refactor_case/home/home_view_model.dart';
+import 'package:flutter_refactor_case/model/car_model.dart';
+import 'package:flutter_refactor_case/model/image_palette.dart';
+import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  MyApp({Key? key}) : super(key: key);
+  var carModel2 = CarModel([
+    ImagePalette(
+      Colors.blue,
+      "assets/images/modelY.jpg",
+    ),
+    ImagePalette(
+      Colors.red,
+      "assets/images/red.jpeg",
+    ),
+    ImagePalette(
+      Colors.yellow,
+      "assets/images/yellow.jpeg",
+    ),
+    ImagePalette(
+      Colors.black,
+      "assets/images/black.jpg",
+    ),
+  ],
+      "Tesla Model Y",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mi lacus. Curabitur lobortis consequat accumsan. Nam varius congue vehicula. Aenean finibus orci elit, fermentum feugiat justo tincidunt id. Sed tempor nisi non nulla commodo feugiat. Pellentesque elementum vestibulum nunc, non bibendum mi. Nunc finibus est odio, ac feugiat nibh finibus vitae. Donec arcu eros, sodales eget",
+      39000);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.amber,
-      ),
-      home: const MyHomePage(),
-    );
+    return Sizer(builder: (context, orientation, deviceType) {
+      return ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return HomeViewModel(
+              carModel: carModel2,
+            );
+          },
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: HomeView(),
+          ));
+    });
   }
 }
 
