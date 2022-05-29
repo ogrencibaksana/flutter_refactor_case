@@ -1,0 +1,10 @@
+{
+    "home_page":{
+
+        "carTitle":"Tesla Model Y",
+        "carDescription":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mi lacus. Curabitur lobortis consequat accumsan. Nam varius congue vehicula. Aenean finibus orci elit, fermentum feugiat justo tincidunt id. Sed tempor nisi non nulla commodo feugiat. Pellentesque elementum vestibulum nunc, non bibendum mi. Nunc finibus est odio, ac feugiat nibh finibus vitae. Donec arcu eros, sodales eget"
+    },
+    "button":{
+        "buy":"Satın Al"
+    }
+}
