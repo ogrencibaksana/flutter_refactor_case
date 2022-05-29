@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_refactor_case/widgets/dot.dart';
+
+import 'Constant/Constant.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,125 +53,110 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-        body: Stack(children: [
-      SafeArea(
+        body: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-                width: 500,
-                height: 325,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/modelY.jpg")),
-                  color: Colors.grey,
-                ),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.chevron_left)),
-                )),
-            const Align(
-              alignment: Alignment.center,
-              child: Text(
-                "Tesla Model Y",
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 50),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0, bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.blue),
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.red),
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.yellow),
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.black),
-                  )
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(11.0),
-              child: Center(
-                child: Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mi lacus. Curabitur lobortis consequat accumsan. Nam varius congue vehicula. Aenean finibus orci elit, fermentum feugiat justo tincidunt id. Sed tempor nisi non nulla commodo feugiat. Pellentesque elementum vestibulum nunc, non bibendum mi. Nunc finibus est odio, ac feugiat nibh finibus vitae. Donec arcu eros, sodales eget"),
-              ),
-            ),
-            Spacer(),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  "39.000 \$",
-                  style: TextStyle(
-                      color: Colors.amber,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      borderRadius: BorderRadius.circular(10)),
-                  width: 180,
-                  height: 50,
-                  child: const Center(
-                    child: Text(
-                      "Satın Al",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            image(context),
+            productName(),
+            productColors(),
+            productDetail(),
+            productPrice(),
+            buttonBuyNow(context),
           ],
         ),
       ),
-    ]));
+    ));
+  }
+
+  Padding buttonBuyNow(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          decoration:
+              BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.circular(10)),
+          width: MediaQuery.of(context).size.width * 0.3,
+          height: MediaQuery.of(context).size.height * 0.06,
+          child: const Center(
+            child: Text(
+              Constant.buttonDetail,
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Padding productPrice() {
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 8.0),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Text(
+          Constant.price,
+          style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold, fontSize: 25),
+        ),
+      ),
+    );
+  }
+
+  Padding productDetail() {
+    return const Padding(
+      padding: EdgeInsets.all(11.0),
+      child: Center(
+        child: Text(Constant.productDetail),
+      ),
+    );
+  }
+
+  Padding productColors() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30.0, bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const DotContainer(color: Colors.blue),
+          const SizedBox(width: 20),
+          const DotContainer(color: Colors.red),
+          const SizedBox(width: 20),
+          const DotContainer(color: Colors.yellow),
+          const SizedBox(width: 20),
+          const DotContainer(color: Colors.black),
+        ],
+      ),
+    );
+  }
+
+  Align productName() {
+    return const Align(
+      alignment: Alignment.center,
+      child: Text(
+        Constant.productName,
+        style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 50),
+      ),
+    );
+  }
+
+  Container image(context) {
+    return Container(
+        width: MediaQuery.of(context).size.width * 0.95,
+        height: MediaQuery.of(context).size.height * 0.45,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Constant.image('modelY.jpg')),
+            fit: BoxFit.cover,
+          ),
+          color: Constant.imageBackgroundColor,
+        ),
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: IconButton(onPressed: () {}, icon: const Icon(Constant.imageIcon)),
+        ));
   }
 }
